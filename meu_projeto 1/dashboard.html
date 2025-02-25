@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Painel de Controle - Administração</h1>
+    </div>
+
+    <div class="container">
+        <h2>Bem-vindo, Administrador!</h2>
+        <p>Gerencie as ordens de serviço e acompanhe o progresso dos técnicos e clientes.</p>
+
+        <!-- Botões de funcionalidades -->
+        <div>
+            <a href="criar_os.html">
+                <button class="button">Criar OS</button>
+            </a>
+            <a href="atribuir_os.html">
+                <button class="button">Atribuir OS</button>
+            </a>
+            <a href="{{ url_for('gerar_relatorio') }}">
+                <button class="button">Gerar Relatório</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Ordens de Serviço Pendentes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número da OS</th>
+                        <th>Aparelho</th>
+                        <th>BTUs</th>
+                        <th>Cliente</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplo de dados de ordens de serviço -->
+                    {% for ordem in ordens %}
+                        <tr>
+                            <td>{{ ordem.id }}</td>
+                            <td>{{ ordem.equipamento }}</td>
+                            <td>{{ ordem.btus }}</td>
+                            <td>{{ ordem.cliente.nome }}</td>
+                            <td>{{ ordem.status }}</td>
+                            <td>
+                                <a href="atribuir_os.html?ordem_id={{ ordem.id }}">
+                                    <button class="button">Atribuir Técnico</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

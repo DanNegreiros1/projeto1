@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atribuir OS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Atribuir Ordem de Serviço</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID da OS</th>
+                    <th>Aparelho</th>
+                    <th>BTUs</th>
+                    <th>Cliente</th>
+                    <th>Status</th>
+                    <th>Atribuir Técnico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de dados de ordens de serviço -->
+                {% for ordem in ordens %}
+                    <tr>
+                        <td>{{ ordem.id }}</td>
+                        <td>{{ ordem.equipamento }}</td>
+                        <td>{{ ordem.btus }}</td>
+                        <td>{{ ordem.cliente_nome }}</td>
+                        <td>{{ ordem.status }}</td>
+                        <td>
+                            <form action="atribuir_os" method="POST">
+                                <select name="tecnico_id" required>
+                                    <option value="">Escolha um técnico</option>
+                                    {% for tecnico in tecnicos %}
+                                        <option value="{{ tecnico.id }}">{{ tecnico.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit">Atribuir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

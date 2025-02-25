@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar OS</title>
+    <style>
+        /* Estilos simples para a página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Criar Ordem de Serviço</h2>
+        <form action="criar_os" method="POST">
+            <div class="form-group">
+                <label for="cliente_nome">Nome do Cliente</label>
+                <select id="cliente_nome" name="cliente_nome" required>
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.nome }}">{{ cliente.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="equipamento">Tipo de Equipamento</label>
+                <select id="equipamento" name="equipamento" required>
+                    <option value="Ar-condicionado piso teto">Ar-condicionado piso teto</option>
+                    <option value="Ar condicionado Split hi-wall">Ar condicionado Split hi-wall</option>
+                    <option value="Split Inverter">Split Inverter</option>
+                    <option value="Split Cassete">Split Cassete</option>
+                    <option value="Multi Split">Multi Split</option>
+                    <option value="Ar-condicionado de janela">Ar-condicionado de janela</option>
+                    <option value="Ar-condicionado portátil">Ar-condicionado portátil</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="btus">BTUs</label>
+                <input type="number" id="btus" name="btus" required>
+            </div>
+            <div class="form-group">
+                <label for="informacoes">Informações Adicionais</label>
+                <textarea id="informacoes" name="informacoes" rows="4"></textarea>
+            </div>
+            <button type="submit">Salvar OS</button>
+        </form>
+    </div>
+</body>
+</html>
